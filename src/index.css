@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.landing-page-background {
+  background-image: linear-gradient(
+      rgba(49, 49, 62, 0.8),
+      rgba(49, 49, 62, 0.8)
+    ),
+    url(./assets/landing.jpg);
+  background-size: 100% auto; /* Cubre horizontalmente, se ajusta automáticamente verticalmente */
+  background-position: center;
+  position: absolute;
+  width: 100%;
+  height: 100%; /* O ajusta la altura según lo necesites */
+}
+
+.text-mine {
+  font-size: 1.1em;
+}
