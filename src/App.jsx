@@ -25,6 +25,7 @@ function App() {
               <Route path="register" element={<RegisterPage />} />
               <Route path="" element={<Navigate to="home" />} />
               <Route path="landing" element={<LandingPage />} />
+              <Route path="home" element={<HomePage />} />
             </Route>
 
             <Route element={<PrivateContainer />}>

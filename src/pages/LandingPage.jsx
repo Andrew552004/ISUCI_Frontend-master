@@ -11,6 +11,9 @@ const LandingPage = () => {
       <Hero></Hero>
       <Features></Features>
       <About></About>
+      <footer className="bg-[#3F3F49] p-4 text-white text-center">
+        <p>&copy; 2024 ISUCI. All rights reserved.</p>
+      </footer>
     </div>
   );
 };

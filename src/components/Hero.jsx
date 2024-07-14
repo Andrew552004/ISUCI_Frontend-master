@@ -18,12 +18,12 @@ const Hero = () => {
         <h1 className="md:text-6xl sm:text-5xl text-4xl font-bold md:py-6">
           Gestión de carreras y Análisis de datos.
         </h1>
-        <div className="flex justify-center items-center">
-          <p className="md:text-3xl sm:text-2xl text-mine font-bold py-4">
+        <div className="md:flex justify-center items-center">
+          <p className="md:text-3xl sm:text-2xl text-mine font-bold py-2">
             Haz parte de una escuadra si eres
           </p>
           <ReactTyped
-            className="md:text-3xl sm:text-2xl text-mine font-bold md:pl-4 pl-2"
+            className="md:text-3xl sm:text-2xl text-mine font-bold md:pl-4"
             strings={["ciclista", "masajista", "director deportivo"]}
             typeSpeed={40}
             backSpeed={50}
