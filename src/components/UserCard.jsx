@@ -10,7 +10,7 @@ function UserCard({ user }) {
                     <p className="mt-1 text-md text-gray-700">{user.correo}</p>
                 </div>
                 <div className="mt-4 sm:mt-0 sm:block sm:space-x-6 text-md">
-                    <button className="mt-6 w-full rounded-md bg-blue-400 py-1.5 font-medium text-white hover:bg-blue-500">
+                    <button className="mt-6 w-full rounded-md bg-black py-1.5 font-medium text-white hover:bg-gray-700">
                         Ver más
                     </button>
                 </div>
