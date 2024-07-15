@@ -3,7 +3,7 @@ import Axios from "axios"
 class ApiService {
     constructor() {
         this.axios = Axios.create({
-            baseURL: "http://dot.runasp.net/api" || '',
+            baseURL: "https://dot.runasp.net/api" || '',
         })
     } 
 }
