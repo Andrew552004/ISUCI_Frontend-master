@@ -3,7 +3,7 @@ import Axios from "axios"
 class ApiService {
     constructor() {
         this.axios = Axios.create({
-            baseURL: "https://localhost:44347/api" || '',
+            baseURL: "http://dot.runasp.net/swagger/index.html" || '',
         })
     } 
 }
