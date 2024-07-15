@@ -7,8 +7,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import AuthenticatorReducer from "./slices/authentication.slice"
 import AppReducer from "./slices/app.slice"
+import TeamReducer from"./slices/team.slice"
 
 const rootReducer = combineReducers({
+    team: TeamReducer,
     loggedUser: AuthenticatorReducer,
     app: AppReducer,
 

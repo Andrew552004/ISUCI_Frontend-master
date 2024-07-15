@@ -47,7 +47,6 @@ function LogInPage() {
     },[authselector.error])
     
     const handleLogin = () => {
-        navigate('/home');
         dispatch(login(
             {
                 email,

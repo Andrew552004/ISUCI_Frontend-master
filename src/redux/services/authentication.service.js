@@ -7,7 +7,14 @@ export class AuthService extends ApiService{
     async register(data){
         try{
             const response = await this.axios.post(`/${baseUrl}`, data);
-            const result = response.data
+            const result = 
+            {
+                userName: response.data.userName,
+                userLastName: response.data.userLastName,
+                userEmail: response.data.userEmail,
+                id: response.data.id,
+                userRole: response.data.userRole,
+            }
 
             return{
                 statuscode: response.status,

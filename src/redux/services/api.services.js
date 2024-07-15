@@ -3,7 +3,7 @@ import Axios from "axios"
 class ApiService {
     constructor() {
         this.axios = Axios.create({
-            baseURL: "http://localhost:44347/api" || '',
+            baseURL: "https://localhost:44347/api" || '',
         })
     } 
 }

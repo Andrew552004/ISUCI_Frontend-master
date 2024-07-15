@@ -10,8 +10,13 @@ const initialState = {
     done:false,
     token: '',
     userData:{
-        name: ""
-        //lo que devuelva el back
+        userName: "",
+        userLastName: "",
+        userEmail: "",
+        userPassword: "",
+        userPasswordCofirmation: "",
+        userRole:"",
+        id:""
     },
     role:'',
 }
@@ -46,47 +51,40 @@ const authenticatorReducer = createSlice({
     },
     extraReducers: (builder) => {
         builder
-
         .addCase(register.pending, (state) =>{
             state.done = false;
             state.error = false;
-            state.token = initialState.token;
             state.role = initialState.role;
             state.userData = initialState.userData;
         })
         .addCase(register.fulfilled, (state, action) =>{
             state.done = true;
             state.error = false;
-            state.token = action.payload.result.token;
-            state.role = action.payload.result.role;
-            state.userData = action.payload.result.userData;
+            state.role = action.payload.result.user.role;
+            state.userData = action.payload.result.user;
         })
         .addCase(register.rejected, (state) =>{
             state.done = false;
             state.error = true;
-            state.token = initialState.token;
             state.role = initialState.role;
             state.userData = initialState.userData;
         })
 
         .addCase(login.pending, (state) =>{
             state.done = false;
-            state.error = false;
-            state.token = initialState.token;
+            state.error = false;;
             state.role = initialState.role;
             state.userData = initialState.userData;
         })
         .addCase(login.fulfilled, (state, action) =>{
             state.done = true;
             state.error = false;
-            state.token = action.payload.result.token;
             state.role = action.payload.result.role;
             state.userData = action.payload.result.userData;
         })
         .addCase(login.rejected, (state) =>{
             state.done = false;
             state.error = true;
-            state.token = initialState.token;
             state.role = initialState.role;
             state.userData = initialState.userData;
         })

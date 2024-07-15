@@ -13,19 +13,20 @@ import UserListPage from "./pages/UserListPage";
 import LandingPage from "./pages/LandingPage";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
+import LoadingBar from "./components/LoadingBar";
 function App() {
   return (
     <div className="App">
       <Provider store={store}>
         <BrowserRouter>
+          <LoadingBar>
+          </LoadingBar>
           <Routes>
             <Route path="/" element={<Navigate to="landing" />} />
             <Route element={<PublicContainer />}>
               <Route path="login" element={<LogInPage />} />
               <Route path="register" element={<RegisterPage />} />
-              <Route path="" element={<Navigate to="home" />} />
               <Route path="landing" element={<LandingPage />} />
-              <Route path="home" element={<HomePage />} />
             </Route>
 
             <Route element={<PrivateContainer />}>

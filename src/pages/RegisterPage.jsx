@@ -8,15 +8,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { register } from "../redux/slices/authentication.slice";
 
 function RegisterPage() {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const authselector = useSelector(state=>state.loggedUser);
     const appselector = useSelector(state=>state.app);
-    const dispatch = useDispatch();
     const [name, setName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const navigate = useNavigate();
 
     useEffect(()=>{
 
@@ -32,7 +32,6 @@ function RegisterPage() {
             progress: undefined,
             theme: "light",
             });
-            navigate("home")
         }
     },[appselector.loading])
 
@@ -53,8 +52,13 @@ function RegisterPage() {
             }
     },[authselector.error])
 
+    useEffect(()=>{
+        if (authselector.done && !authselector.loading){
+           navigate("/home",{replace: true});
+        }
+    },[authselector.userData])
+
     const handleRegister = async() => {
-        navigate('/home');
         if (!name || !email ||!lastName|| !password || !confirmPassword) {
             toast.error('Todos los campos son obligatorios', {
                 position: "top-right",
@@ -85,11 +89,11 @@ function RegisterPage() {
 
         dispatch(register(
             { 
-             userName: "string",
-             userEmail: "user@example.com",
-             userPassword: "string",
-             userRole: 0,
-             isActive:true
+                userName: name,
+                userLastName: lastName,
+                userEmail: email,
+                userPassword: password,
+                userPasswordCofirmation: confirmPassword
             }
          ))
 

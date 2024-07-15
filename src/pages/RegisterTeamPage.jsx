@@ -4,44 +4,50 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import AppBase from "../components/AppBase";
+import { useDispatch, useSelector } from "react-redux";
+import { register } from "../redux/slices/team.slice";
 
 function RegisterTeamPage() {
-  const [formData, setFormData] = useState({
-    nombreEquipo: "",
-    pais: "",
-    anoFundacion: "",
-    ciclistas: [],
-    otrosParticipantes: [],
-  });
+    const dispatch = useDispatch()
+    const teamSelector = useSelector(state=>state.team)
+    const appSelector = useSelector(state=>state.app)
+    const [formData, setFormData] = useState({
+        nombreEquipo: "",
+        pais: "",
+        anoFundacion: "",
+        ciclistas: [],
+        otrosParticipantes: []
+    });
 
   const [availableParticipants, setAvailableParticipants] = useState([]);
 
-  useEffect(() => {
-    // Fetch previously registered participants
-    const fetchParticipants = async () => {
-      try {
-        const response = await axios.get("http://localhost:8080/participantes");
-        setAvailableParticipants(response.data);
-      } catch (error) {
-        console.error("Error fetching participants:", error);
-        toast.error(`Error al obtener participantes: ${error.response.data}`, {
-          position: "bottom-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-      }
-    };
-    fetchParticipants();
-  }, []);
+    useEffect(()=>{
+        if(teamSelector.done && !appSelector.loading){
+            setFormData({
+                nombreEquipo: "",
+                pais: "",
+                anoFundacion: "",
+                ciclistas: [],
+                otrosParticipantes: []
+            })
+            toast.success('Registro exitoso', {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                
+                });
+        }
+    },[teamSelector.done])
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+    
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
   const handleAddParticipant = (participant) => {
     if (participant.tipo === "Ciclista") {
@@ -76,64 +82,32 @@ function RegisterTeamPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formValues = Object.values(formData).filter((value) =>
-      Array.isArray(value) ? value.length > 0 : value !== ""
-    );
-    const allFieldsFilled = formValues.length === Object.keys(formData).length;
+        const formValues = Object.values(formData).filter(value => value !== "");
+        const allFieldsFilled = formValues.length === Object.keys(formData).length;
 
-    if (!allFieldsFilled) {
-      toast.warn(`Completa todos los campos.`, {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-      return;
-    }
-
-    try {
-      await axios.post("http://localhost:8080/equipo/agregar", formData, {
-        headers: {
-          user: localStorage.getItem("user"),
-          password: localStorage.getItem("password"),
-        },
-      });
-      toast.success(`Equipo registrado exitosamente`, {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-
-      setFormData({
-        nombreEquipo: "",
-        pais: "",
-        anoFundacion: "",
-        ciclistas: [],
-        otrosParticipantes: [],
-      });
-    } catch (error) {
-      console.error("Error al registrar el equipo:", error);
-      toast.error(`Error al registrar equipo: ${error.response.data}`, {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    }
-  };
+        if (!allFieldsFilled) {
+            toast.warn("Completa todos los campos",
+             {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            return;
+        }
+        dispatch(register(
+            {
+                teamName:formData.nombreEquipo,
+                country: formData.pais,
+                creationDate: formData.anoFundacion,
+                teamsMembers: formData.otrosParticipantes
+            }
+        ))
+    };
 
   return (
     <AppBase>
