@@ -47,6 +47,9 @@ const authenticatorReducer = createSlice({
     name: sliceName,
     initialState,
     reducers:{
+        resetuser:(state)=>{
+            state.userData=initialState.userData
+        }
 
     },
     extraReducers: (builder) => {
@@ -92,4 +95,5 @@ const authenticatorReducer = createSlice({
 })
 
 export {register, login};
+export const{resetuser}=authenticatorReducer.actions;
 export default authenticatorReducer.reducer;

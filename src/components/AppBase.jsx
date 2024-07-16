@@ -2,14 +2,22 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../utils/GlobalContext";
 import avatarImg from "../assets/avatar.png";
+import { useDispatch } from "react-redux";
+import { resetuser } from "../redux/slices/authentication.slice";
 
 function AppBase({ children }) {
+  const dispatch=useDispatch()
   const [profileOpen, setProfileOpen] = useState(false);
   const navigate = useNavigate();
 
   const toggleProfile = () => {
     setProfileOpen(!profileOpen);
   };
+  const handlelogout = () =>{
+    dispatch(resetuser())
+    navigate("home")
+
+  }
 
   return (
     <main className="min-h-screen w-full bg-gray-100 text-gray-700">
@@ -113,7 +121,7 @@ function AppBase({ children }) {
                       d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
                     ></path>
                   </svg>
-                  <div>Cerrar Sesión</div>
+                  <div onClick={handlelogout}>Cerrar Sesión</div>
                 </button>
               </div>
             </div>
