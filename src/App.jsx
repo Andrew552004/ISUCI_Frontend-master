@@ -4,7 +4,8 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import PrivateContainer from "./containers/privateContainer";
 import PublicContainer from "./containers/publicContainer";
 import CyclistStatsPage from "./pages/CyclistStatsPage";
-import HomePage from "./pages/HomePage";
+//import HomePage from "./pages/HomePage";
+import Simulacion from "./pages/Simulacion";
 import LogInPage from "./pages/LogInPage";
 import RegisterCustomer from "./pages/RegisterCustomer";
 import RegisterPage from "./pages/RegisterPage";
@@ -19,8 +20,7 @@ function App() {
     <div className="App">
       <Provider store={store}>
         <BrowserRouter>
-          <LoadingBar>
-          </LoadingBar>
+          <LoadingBar></LoadingBar>
           <Routes>
             <Route path="/" element={<Navigate to="landing" />} />
             <Route element={<PublicContainer />}>
@@ -31,7 +31,7 @@ function App() {
 
             <Route element={<PrivateContainer />}>
               <Route path="" element={<Navigate to="home" />} />
-              <Route path="home" element={<HomePage />} />
+              <Route path="home" element={<Simulacion />} />
               <Route path="cart" element={<UserListPage />} />
               <Route path="customer/register" element={<RegisterCustomer />} />
               <Route path="team/register" element={<RegisterTeamPage />} />
