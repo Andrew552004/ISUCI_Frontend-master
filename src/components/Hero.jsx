@@ -15,7 +15,7 @@ const Hero = () => {
         <p className="text-[#61a7fc] font-bold p-2">
           SISTEMA DE INFORMACIÓN DE CICLISMO
         </p>
-        <h1 className="md:text-6xl sm:text-5xl text-4xl font-bold md:py-6">
+        <h1 className="md:text-6xl sm:text-5xl text-4xl font-bold md:py-6 text-white">
           Gestión de carreras y Análisis de datos.
         </h1>
         <div className="md:flex justify-center items-center">
